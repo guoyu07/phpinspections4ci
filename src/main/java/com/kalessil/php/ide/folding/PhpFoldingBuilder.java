@@ -12,7 +12,6 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import consulo.annotations.RequiredReadAction;
 import com.kalessil.php.lang.psi.PhpBraceOwner;
 import com.kalessil.php.lang.psi.PhpClass;
 import com.kalessil.php.lang.psi.PhpFunction;
@@ -25,7 +24,6 @@ import com.kalessil.php.lang.psi.visitors.PhpRecursiveElementVisitor;
  */
 public class PhpFoldingBuilder implements FoldingBuilder
 {
-	@RequiredReadAction
 	@NotNull
 	@Override
 	public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document)

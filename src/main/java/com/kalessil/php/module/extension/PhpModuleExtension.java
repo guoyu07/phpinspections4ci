@@ -3,7 +3,6 @@ package com.kalessil.php.module.extension;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.projectRoots.SdkType;
-import consulo.annotations.RequiredReadAction;
 import consulo.extension.impl.ModuleExtensionWithSdkImpl;
 import consulo.module.extension.ModuleInheritableNamedPointer;
 import com.kalessil.php.PhpLanguageLevel;
@@ -24,7 +23,6 @@ public class PhpModuleExtension extends ModuleExtensionWithSdkImpl<PhpModuleExte
 		myLanguageLevel = new LanguageLevelModuleInheritableNamedPointerImpl(layer, id);
 	}
 
-	@RequiredReadAction
 	@Override
 	public void commit(@NotNull PhpModuleExtension mutableModuleExtension)
 	{
