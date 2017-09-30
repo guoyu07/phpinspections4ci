@@ -7,12 +7,21 @@
             <filterchain>
                 <replacestring from="consulo.php."                    to="com.kalessil.php."/>
                 <replacestring from="consulo.psi.tree.ASTLazyFactory" to="com.intellij.lang.ASTFactory"/>
-                <replacestring from="implements ASTLazyFactory"       to="implements ASTFactory"/>
+                <replacestring from="implements ASTLazyFactory"       to="extends ASTFactory"/>
             </filterchain>
         </copy>
 
+        <!-- Libraries copy -->
         <copy todir="${basedir}/lib" overwrite="true" force="true">
             <fileset includes="**/*.*" dir="${consulo.php.sources}/lib"/>
+        </copy>
+
+        <!-- Resources copy -->
+        <copy todir="${basedir}/resources/icons" overwrite="true" force="true">
+            <fileset includes="**/*.*" dir="${consulo.php.sources}/resources/icons"/>
+        </copy>
+        <copy todir="${basedir}/resources/messages" overwrite="true" force="true">
+            <fileset includes="**/*.*" dir="${consulo.php.sources}/resources/messages"/>
         </copy>
 
     </target>
