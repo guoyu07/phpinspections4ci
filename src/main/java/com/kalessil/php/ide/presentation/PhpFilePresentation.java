@@ -7,7 +7,6 @@ import javax.swing.Icon;
 import com.kalessil.php.lang.psi.PhpFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.ItemPresentationProvider;
 import com.intellij.openapi.module.Module;
@@ -46,7 +45,7 @@ public class PhpFilePresentation implements ItemPresentationProvider<PhpFile>
 			@Override
 			public Icon getIcon(boolean unused)
 			{
-				return IconDescriptorUpdaters.getIcon(item, 0);
+				return item.getIcon(0);
 			}
 		};
 	}

@@ -7,7 +7,6 @@ import com.kalessil.php.lang.psi.PhpClass;
 import com.kalessil.php.module.extension.PhpModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.ItemPresentationProvider;
 import com.intellij.openapi.module.Module;
@@ -65,7 +64,7 @@ public class PhpClassPresentation implements ItemPresentationProvider<PhpClass>
 			@Override
 			public Icon getIcon(boolean unused)
 			{
-				return IconDescriptorUpdaters.getIcon(phpClass, 0);
+				return phpClass.getIcon(0);
 			}
 
 			private String getPresentablePathForClass(@NotNull PhpClass klass)
