@@ -1,0 +1,14 @@
+<project name="Php Inspections (EA Extended) 4CI" basedir=".">
+
+    <target name="from-consulo">
+        <property name="consulo.php.sources" value="${basedir}/../consulo-php" />
+        <copy todir="${basedir}/src/main/java/com/kalessil/php/lang">
+            <fileset includes="**/*.*" dir="${basedir}/src/consulo/php/lang"/>
+        </copy>
+    </target>
+
+    <target name="from-ea-extended">
+        <property name="eaextended.sources" value="${basedir}/../PhpInspectionsEA"/>
+    </target>
+
+</project>

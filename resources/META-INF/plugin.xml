@@ -1,0 +1,14 @@
+<idea-plugin>
+    <id>com.kalessil.phpStorm.phpInspections4ci</id>
+    <idea-version since-build="162.1889"/>
+
+    <name>Php Inspections (EA Extended) 4CI</name>
+    <version>0.0.1</version>
+    <vendor email="kalessil@gmail.com">Vladimir Reznichenko</vendor>
+
+    <description>PhpInspections (EA Extended) 4CI</description>
+    <change-notes/>
+
+    <extensions defaultExtensionNs="com.intellij"/>
+    <actions/>
+</idea-plugin>
