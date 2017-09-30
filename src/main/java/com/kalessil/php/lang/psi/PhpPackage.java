@@ -1,6 +1,6 @@
 package com.kalessil.php.lang.psi;
 
-com.intellij.psi.PsiPackage;
+import com.intellij.psi.PsiPackage;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.ArrayFactory;
 
