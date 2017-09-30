@@ -17,7 +17,6 @@ import com.intellij.psi.util.PsiTreeUtil;
  */
 public class PhpDocCommentImpl extends CompositePsiElement implements PhpDocComment
 {
-
 	public PhpDocCommentImpl()
 	{
 		super(PhpDocElementTypes.DOC_COMMENT);

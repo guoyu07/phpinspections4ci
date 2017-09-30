@@ -8,8 +8,6 @@ import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
-import consulo.lang.LanguageVersion;
-import consulo.lang.util.LanguageVersionUtil;
 import com.kalessil.php.lang.PhpFileType;
 import com.kalessil.php.lang.documentation.phpdoc.lexer.PhpDocLexer;
 import com.kalessil.php.lang.documentation.phpdoc.lexer.PhpDocTokenTypes;
@@ -31,17 +29,13 @@ public interface PhpDocElementTypes extends PhpDocTokenTypes
 			return PhpFileType.INSTANCE.getLanguage();
 		}
 
-		@Override
-		public ASTNode parseContents(ASTNode chameleon)
-		{
-			PsiBuilderFactory factory = PsiBuilderFactory.getInstance();
-			final PsiElement parentElement = chameleon.getTreeParent().getPsi();
-
-			LanguageVersion defaultVersion = LanguageVersionUtil.findDefaultVersion(getLanguage());
-			final PsiBuilder builder = factory.createBuilder(parentElement.getProject(), chameleon, new PhpDocLexer(), getLanguage(), defaultVersion, chameleon.getText());
-			final PsiParser parser = new PhpDocParser();
-			return parser.parse(this, builder, defaultVersion).getFirstChildNode();
-		}
+		public ASTNode parseContents(ASTNode chameleon) {
+            PsiBuilderFactory factory = PsiBuilderFactory.getInstance();
+            PsiElement parentElement = chameleon.getTreeParent().getPsi();
+            PsiBuilder builder = factory.createBuilder(parentElement.getProject(), chameleon, new PhpDocLexer(), this.getLanguage(), chameleon.getText());
+            PsiParser parser = new PhpDocParser();
+            return parser.parse(this, builder).getFirstChildNode();
+        }
 	};
 
 	final public PhpDocElementType phpDocText = new PhpDocElementType("PhpDocText");
