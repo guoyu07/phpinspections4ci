@@ -185,7 +185,7 @@ public class PhpVariantsUtil
 			PhpVariableReference variable = (PhpVariableReference) element;
 			item.setName(variable.getName());
 
-			item.setIcon(IconDescriptorUpdaters.getIcon(element, 0));
+			item.setIcon(element.getIcon(0));
 			final PhpClass variableType = variable.getType().getType();
 			if(variableType != null)
 			{
@@ -196,7 +196,7 @@ public class PhpVariantsUtil
 		{
 			PhpParameter parameter = (PhpParameter) element;
 			item.setName(parameter.getName());
-			item.setIcon(IconDescriptorUpdaters.getIcon(element, 0));
+			item.setIcon(element.getIcon(0));
 			final PhpClass variableType = parameter.getType().getType();
 			if(variableType != null)
 			{
