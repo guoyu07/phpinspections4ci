@@ -1,6 +1,5 @@
 package com.kalessil.php.lang;
 
-import com.kalessil.php.vfs.PharFileType;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
@@ -14,10 +13,8 @@ public class PhpFileTypeFactory extends FileTypeFactory
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
 	{
-		for(String extention : PhpFileType.EXTENTIONS)
-		{
-			fileTypeConsumer.consume(PhpFileType.INSTANCE, extention);
+		for (final String extension : PhpFileType.EXTENTIONS) {
+			fileTypeConsumer.consume(PhpFileType.INSTANCE, extension);
 		}
-		fileTypeConsumer.consume(PharFileType.INSTANCE);
 	}
 }
