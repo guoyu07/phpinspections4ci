@@ -6,7 +6,6 @@ import com.kalessil.php.lang.documentation.phpdoc.parser.tags.PhpDocVarTagParser
 import com.kalessil.php.lang.parser.util.PhpPsiBuilder;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
-import consulo.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
@@ -25,9 +24,8 @@ public class PhpDocParser implements PsiParser
 		PhpDocReturnTagParser.register();
 	}
 
-	@Override
 	@NotNull
-	public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion)
+	public ASTNode parse(@NotNull IElementType root, @NotNull PsiBuilder builder)
 	{
 		PhpPsiBuilder phpBuilder = new PhpPsiBuilder(builder);
 		PsiBuilder.Marker rootMarker = phpBuilder.mark();
