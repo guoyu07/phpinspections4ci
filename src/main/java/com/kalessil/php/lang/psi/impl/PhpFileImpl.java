@@ -1,0 +1,127 @@
+package com.kalessil.php.lang.psi.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.navigation.ItemPresentationProviders;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.util.ArrayUtil;
+import com.kalessil.php.lang.PhpFileType;
+import com.kalessil.php.lang.PhpLanguage;
+import com.kalessil.php.lang.psi.PhpClass;
+import com.kalessil.php.lang.psi.PhpElement;
+import com.kalessil.php.lang.psi.PhpField;
+import com.kalessil.php.lang.psi.PhpFile;
+import com.kalessil.php.lang.psi.PhpFunction;
+import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
+import com.kalessil.php.lang.psi.visitors.PhpRecursiveElementVisitor;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: jay
+ * Date: 26.02.2007
+ *
+ * @author jay
+ */
+public class PhpFileImpl extends PsiFileBase implements PhpFile
+{
+	public PhpFileImpl(FileViewProvider viewProvider)
+	{
+		super(viewProvider, PhpLanguage.INSTANCE);
+	}
+
+	@Override
+	public PhpElement getFirstPsiChild()
+	{
+		PsiElement[] children = getChildren();
+		if(children.length > 0)
+		{
+			if(children[0] instanceof PhpElement)
+			{
+				return (PhpElement) children[0];
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public PhpElement getNextPsiSibling()
+	{
+		return null;
+	}
+
+	@Override
+	public PhpElement getPrevPsiSibling()
+	{
+		return null;
+	}
+
+	@Override
+	@NotNull
+	public FileType getFileType()
+	{
+		return PhpFileType.INSTANCE;
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof PhpElementVisitor)
+		{
+			((PhpElementVisitor) visitor).visitPhpFile(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
+	}
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return ItemPresentationProviders.getItemPresentation(this);
+	}
+
+	@NotNull
+	@Override
+	public PhpElement[] getTopLevelElements()
+	{
+		List<PhpElement> phpElementList = new ArrayList<PhpElement>();
+		accept(new PhpRecursiveElementVisitor()
+		{
+			@Override
+			public void visitClass(PhpClass phpClass)
+			{
+				if(phpClass.getParent().getParent() == PhpFileImpl.this)
+				{
+					phpElementList.add(phpClass);
+				}
+			}
+
+			@Override
+			public void visitField(PhpField phpField)
+			{
+				if(phpField.getParent().getParent() == PhpFileImpl.this)
+				{
+					phpElementList.add(phpField);
+				}
+			}
+
+			@Override
+			public void visitFunction(PhpFunction phpFunction)
+			{
+				if(phpFunction.getParent().getParent() == PhpFileImpl.this)
+				{
+					phpElementList.add(phpFunction);
+				}
+			}
+		});
+		return ArrayUtil.toObjectArray(phpElementList, PhpElement.class);
+	}
+}
