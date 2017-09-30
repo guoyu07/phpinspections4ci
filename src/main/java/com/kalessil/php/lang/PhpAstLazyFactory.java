@@ -13,7 +13,7 @@ import com.intellij.lang.ASTFactory;
  * @author VISTALL
  * @since 29.10.13.
  */
-public class PhpAstLazyFactory implements ASTFactory
+public class PhpAstLazyFactory extends ASTFactory
 {
 	@NotNull
 	@Override
