@@ -3,7 +3,7 @@ package com.kalessil.php.lang.highlighter;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.kalessil.php.PhpLanguageLevel;
+import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.kalessil.php.lang.documentation.phpdoc.lexer.PhpDocTokenTypes;
 import com.kalessil.php.lang.documentation.phpdoc.psi.PhpDocElementType;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
@@ -13,30 +13,31 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.StringEscapesTokenTypes;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
-import com.intellij.util.Processor;
-import consulo.fileTypes.LanguageVersionableSyntaxHighlighter;
-import consulo.lang.LanguageVersion;
 
 /**
  * @author Maxim.Mossienko
- *         Date: 29.01.2009
- *         Time: 22:30:17
+ * @author kalessil
  */
-public class PhpFileSyntaxHighlighter extends LanguageVersionableSyntaxHighlighter
+public class PhpFileSyntaxHighlighter extends SyntaxHighlighterBase
 {
-	private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
-	private static final Map<IElementType, TextAttributesKey> DOC_ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
+	private final Lexer myBaseLexer;
 
-	public PhpFileSyntaxHighlighter(LanguageVersion languageVersion)
-	{
-		super(languageVersion);
-	}
+	public PhpFileSyntaxHighlighter() {
+        this(null);
+    }
 
-	@Override
-	public Lexer getHighlightingLexer(LanguageVersion languageVersion)
-	{
-		return new PhpHighlightingLexer((PhpLanguageLevel) languageVersion);
-	}
+    public PhpFileSyntaxHighlighter(Lexer baseLexer) {
+        this.myBaseLexer = baseLexer;
+    }
+
+    @NotNull
+    public Lexer getHighlightingLexer() {
+        return new PhpHighlightingLexer(this.myBaseLexer);
+    }
+
+	private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
+	private static final Map<IElementType, TextAttributesKey> DOC_ATTRIBUTES = new HashMap<>();
+
 
 	@Override
 	@NotNull
@@ -94,17 +95,9 @@ public class PhpFileSyntaxHighlighter extends LanguageVersionableSyntaxHighlight
 		ATTRIBUTES.put(PhpDocTokenTypes.DOC_TAG_NAME, PhpHighlightingData.DOC_COMMENT);
 		DOC_ATTRIBUTES.put(PhpDocTokenTypes.DOC_TAG_NAME, PhpHighlightingData.DOC_TAG);
 
-		IElementType[] javadoc = IElementType.enumerate(new Processor<IElementType>()
-		{
-			@Override
-			public boolean process(IElementType type)
-			{
-				return type instanceof PhpDocElementType;
-			}
-		});
+		IElementType[] phpdoc = IElementType.enumerate((type) -> type instanceof PhpDocElementType);
 
-		for(IElementType type : javadoc)
-		{
+		for (final IElementType type : phpdoc) {
 			ATTRIBUTES.put(type, PhpHighlightingData.DOC_COMMENT);
 		}
 
