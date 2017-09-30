@@ -1,13 +1,13 @@
 package com.kalessil.php.module.packageSupport;
 
+import com.intellij.openapi.roots.ModuleExtension;
+import com.kalessil.php.lang.psi.PsiPackageManager;
 import com.kalessil.php.lang.psi.impl.PhpPackageImpl;
 import com.kalessil.php.module.PhpModuleExtensionUtil;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.module.Module;
 import com.intellij.psi.PsiManager;
-import consulo.module.extension.ModuleExtension;
 import com.intellij.psi.PsiPackage;
-import com.intellij.psi.PsiPackageManager;
 import com.intellij.psi.PsiPackageSupportProvider;
 
 /**

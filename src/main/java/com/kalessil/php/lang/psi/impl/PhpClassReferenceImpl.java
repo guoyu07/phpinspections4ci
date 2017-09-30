@@ -3,6 +3,7 @@ package com.kalessil.php.lang.psi.impl;
 import java.util.Collection;
 import java.util.List;
 
+import com.kalessil.php.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
@@ -20,17 +21,9 @@ import com.kalessil.php.completion.ClassUsageContext;
 import com.kalessil.php.index.PhpFullFqClassIndex;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.parser.PhpElementTypes;
-import com.kalessil.php.lang.psi.PhpClass;
-import com.kalessil.php.lang.psi.PhpClassReference;
-import com.kalessil.php.lang.psi.PhpConstantReference;
-import com.kalessil.php.lang.psi.PhpFunction;
-import com.kalessil.php.lang.psi.PhpNamespaceStatement;
-import com.kalessil.php.lang.psi.PhpPackage;
-import com.kalessil.php.lang.psi.PhpPsiElementFactory;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
 import com.kalessil.php.module.extension.PhpModuleExtension;
 import com.intellij.psi.PsiPackage;
-import com.intellij.psi.PsiPackageManager;
 
 /**
  * @author jay
