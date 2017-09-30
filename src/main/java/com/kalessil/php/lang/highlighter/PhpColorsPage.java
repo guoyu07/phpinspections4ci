@@ -11,7 +11,6 @@ import com.intellij.psi.codeStyle.DisplayPrioritySortable;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.PlatformUtils;
 import com.kalessil.php.PhpBundle;
-import com.kalessil.php.PhpIcons2;
 import com.kalessil.php.PhpLanguageLevel;
 import com.kalessil.php.lang.PhpLanguage;
 import org.jetbrains.annotations.NonNls;
@@ -81,13 +80,6 @@ public class PhpColorsPage implements RainbowColorSettingsPage, DisplayPriorityS
 	public String getDisplayName()
 	{
 		return PhpBundle.message("color.settings.name");
-	}
-
-	@Override
-	@Nullable
-	public Icon getIcon()
-	{
-		return PhpIcons2.Php;
 	}
 
 	@Override

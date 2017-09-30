@@ -22,7 +22,6 @@ import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.kalessil.php.PhpBundle;
-import com.kalessil.php.PhpIcons2;
 
 /**
  * @author Maxim
@@ -132,19 +131,6 @@ public class PhpSdkType extends SdkType
 	{
 		return type == OrderRootType.CLASSES || type == OrderRootType.SOURCES;
 	}
-
-	@Override
-	public Icon getIcon()
-	{
-		return PhpIcons2.Php;
-	}
-
-//	@Nullable
-//	@Override
-//	public Icon getGroupIcon()
-//	{
-//		return PhpIcons2.Php;
-//	}
 
 	public void saveAdditionalData(@NotNull SdkAdditionalData additionalData, @NotNull Element additional) {
     }

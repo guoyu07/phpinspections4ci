@@ -2,8 +2,8 @@ package com.kalessil.php.lang;
 
 import javax.swing.Icon;
 
+import com.intellij.openapi.util.IconLoader;
 import com.kalessil.php.PhpBundle;
-import com.kalessil.php.PhpIcons2;
 import com.kalessil.php.lang.highlighter.PhpSyntaxHighlighter;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -80,7 +80,7 @@ public class PhpFileType extends LanguageFileType
 	@Nullable
 	public Icon getIcon()
 	{
-		return PhpIcons2.Php;
+		return IconLoader.findIcon("/icons/fileTypes/php.png");
 	}
 
 }
