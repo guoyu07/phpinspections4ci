@@ -33,6 +33,7 @@ public interface PhpHighlightingData
 	TextAttributesKey IDENTIFIER = TextAttributesKey.createTextAttributesKey("PHP_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
 	TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("PHP_CONSTANT", DefaultLanguageHighlighterColors.STATIC_FIELD);
 	TextAttributesKey VAR = TextAttributesKey.createTextAttributesKey("PHP_VAR", DefaultLanguageHighlighterColors.INSTANCE_FIELD);
+	TextAttributesKey PARAMETER = TextAttributesKey.createTextAttributesKey("PHP_PARAMETER", DefaultLanguageHighlighterColors.PARAMETER);
 
 	TextAttributesKey COMMA = TextAttributesKey.createTextAttributesKey("PHP_COMMA", DefaultLanguageHighlighterColors.COMMA);
 	TextAttributesKey SEMICOLON = TextAttributesKey.createTextAttributesKey("PHP_SEMICOLON", DefaultLanguageHighlighterColors.SEMICOLON);

@@ -4,9 +4,16 @@ import java.util.Map;
 
 import javax.swing.Icon;
 
+import com.intellij.lang.Language;
+import com.intellij.openapi.options.colors.RainbowColorSettingsPage;
+import com.intellij.psi.codeStyle.DisplayPriority;
+import com.intellij.psi.codeStyle.DisplayPrioritySortable;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.util.PlatformUtils;
 import com.kalessil.php.PhpBundle;
 import com.kalessil.php.PhpIcons2;
 import com.kalessil.php.PhpLanguageLevel;
+import com.kalessil.php.lang.PhpLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,13 +24,10 @@ import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
 
 /**
- * Created by IntelliJ IDEA.
- * User: jay
- * Date: 13.03.2007
- *
  * @author jay
+ * @author kalessil
  */
-public class PhpColorsPage implements ColorSettingsPage
+public class PhpColorsPage implements RainbowColorSettingsPage, DisplayPrioritySortable
 {
 
 	private static final String DEMO_TEXT = "<?php\n" +
@@ -104,7 +108,7 @@ public class PhpColorsPage implements ColorSettingsPage
 	@NotNull
 	public SyntaxHighlighter getHighlighter()
 	{
-		return new PhpFileSyntaxHighlighter(PhpLanguageLevel.HIGHEST);
+		return new PhpFileSyntaxHighlighter();
 	}
 
 	@Override
@@ -121,4 +125,20 @@ public class PhpColorsPage implements ColorSettingsPage
 	{
 		return null;
 	}
+
+	@Nullable
+    public Language getLanguage() {
+        return PhpLanguage.INSTANCE;
+    }
+
+	public DisplayPriority getPriority() {
+        return PlatformUtils.isPhpStorm() ? DisplayPriority.KEY_LANGUAGE_SETTINGS : DisplayPriority.LANGUAGE_SETTINGS;
+    }
+
+	public boolean isRainbowType(TextAttributesKey type) {
+        return  PhpHighlightingData.PARAMETER.equals(type) ||
+				PhpHighlightingData.VAR.equals(type) ||
+				PhpHighlightingData.DOC_COMMENT.equals(type);
+    }
+
 }
