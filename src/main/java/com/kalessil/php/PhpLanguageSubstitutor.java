@@ -1,7 +1,6 @@
 package com.kalessil.php;
 
 import com.kalessil.php.lang.PhpLanguage;
-import com.kalessil.php.module.extension.PhpModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.Language;
@@ -23,11 +22,6 @@ public class PhpLanguageSubstitutor extends LanguageSubstitutor
 	{
 		Module moduleForFile = ModuleUtilCore.findModuleForFile(virtualFile, project);
 		if(moduleForFile == null)
-		{
-			return null;
-		}
-
-		if(ModuleUtilCore.getExtension(moduleForFile, PhpModuleExtension.class) == null)
 		{
 			return null;
 		}

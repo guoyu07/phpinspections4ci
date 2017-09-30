@@ -22,7 +22,6 @@ import com.kalessil.php.index.PhpFullFqClassIndex;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.parser.PhpElementTypes;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
-import com.kalessil.php.module.extension.PhpModuleExtension;
 import com.intellij.psi.PsiPackage;
 
 /**
@@ -109,16 +108,8 @@ public class PhpClassReferenceImpl extends PhpElementImpl implements PhpClassRef
 				builder.append(name);
 
 				String packageName = builder.toString();
+				return ResolveResult.EMPTY_ARRAY;
 
-				PsiPackage aPackage = PsiPackageManager.getInstance(getProject()).findPackage(packageName, PhpModuleExtension.class);
-				if(aPackage != null)
-				{
-					return new ResolveResult[]{new PsiElementResolveResult(aPackage, true)};
-				}
-				else
-				{
-					return ResolveResult.EMPTY_ARRAY;
-				}
 			case TO_FQ_CLASS:
 				if(PhpConstants.SELF.equals(name))
 				{

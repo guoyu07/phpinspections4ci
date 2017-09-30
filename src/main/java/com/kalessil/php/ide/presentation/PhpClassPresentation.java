@@ -4,7 +4,6 @@ import javax.swing.Icon;
 
 import com.kalessil.php.PhpLanguageLevel;
 import com.kalessil.php.lang.psi.PhpClass;
-import com.kalessil.php.module.extension.PhpModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.navigation.ItemPresentation;
@@ -38,26 +37,7 @@ public class PhpClassPresentation implements ItemPresentationProvider<PhpClass>
 			public String getLocationString()
 			{
 				Module moduleForPsiElement = ModuleUtil.findModuleForPsiElement(phpClass);
-
-				String location = null;
-				if(moduleForPsiElement != null)
-				{
-					PhpModuleExtension extension = ModuleUtilCore.getExtension(moduleForPsiElement, PhpModuleExtension.class);
-					if(extension != null && extension.getLanguageLevel().isAtLeast(PhpLanguageLevel.PHP_5_3))
-					{
-						location = phpClass.getNamespace();
-
-						if(location != null)
-						{
-							location = "(" + location + ")";
-						}
-					}
-				}
-				if(location == null)
-				{
-					location = getPresentablePathForClass(phpClass);
-				}
-				return location;
+				return getPresentablePathForClass(phpClass);
 			}
 
 			@Nullable
