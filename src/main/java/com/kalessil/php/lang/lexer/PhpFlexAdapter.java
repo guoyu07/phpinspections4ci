@@ -1,21 +1,15 @@
 package com.kalessil.php.lang.lexer;
 
-import com.kalessil.php.PhpLanguageLevel;
 import com.intellij.lexer.FlexAdapter;
+import com.kalessil.php.PhpLanguageLevel;
 
 /**
- * Created by IntelliJ IDEA.
- * User: jay
- * Date: 26.02.2007
- *
  * @author jay
  */
-public class PhpFlexAdapter extends FlexAdapter
-{
+public class PhpFlexAdapter extends FlexAdapter {
 
-	public PhpFlexAdapter(PhpLanguageLevel languageLevel)
-	{
-		super(new PhpFlexLexer(false, languageLevel));
-	}
+    public PhpFlexAdapter(PhpLanguageLevel languageLevel) {
+        super(new PhpFlexLexer(false, languageLevel));
+    }
 
 }

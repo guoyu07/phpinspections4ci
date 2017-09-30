@@ -1,6 +1,8 @@
 package com.kalessil.php.lang.parser;
 
+import com.intellij.openapi.project.Project;
 import com.kalessil.php.PhpLanguageLevel;
+import com.kalessil.php.lang.documentation.phpdoc.lexer.PhpDocTokenTypes;
 import com.kalessil.php.lang.lexer.PhpFlexAdapter;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.psi.PhpStubElements;
@@ -15,28 +17,36 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import consulo.lang.LanguageVersion;
 
 /**
- * Created by IntelliJ IDEA.
- * User: jay
- * Date: 26.02.2007
- *
  * @author jay
+ * @author kalessil
  */
 public class PhpParserDefinition implements ParserDefinition
 {
+	private static final TokenSet WHITESPACE_TOKENS;
+	static {
+        WHITESPACE_TOKENS = TokenSet.create(PhpTokenTypes.WHITE_SPACE, PhpDocTokenTypes.DOC_WHITESPACE);
+    }
 
-	@Override
 	@NotNull
-	public Lexer createLexer(@NotNull LanguageVersion languageVersion)
-	{
-		return new PhpFlexAdapter((PhpLanguageLevel) languageVersion);
+    public TokenSet getWhitespaceTokens() {
+		return WHITESPACE_TOKENS;
+	}
+
+	@NotNull
+    public Lexer createLexer(@NotNull Project project) {
+		return new PhpFlexAdapter(PhpLanguageLevel.PHP_5_6);
+    }
+
+    @NotNull
+    public TokenSet getCommentTokens() {
+        return PhpElementTypes.tsCOMMENTS;
 	}
 
 	@Override
 	@NotNull
-	public PsiParser createParser(@NotNull LanguageVersion languageVersion)
+	public PsiParser createParser(@NotNull Project project)
 	{
 		return new PhpPsiParser();
 	}
@@ -50,21 +60,7 @@ public class PhpParserDefinition implements ParserDefinition
 
 	@Override
 	@NotNull
-	public TokenSet getWhitespaceTokens(@NotNull LanguageVersion languageVersion)
-	{
-		return TokenSet.create(PhpTokenTypes.WHITE_SPACE, PhpTokenTypes.DOC_WHITESPACE);
-	}
-
-	@Override
-	@NotNull
-	public TokenSet getCommentTokens(@NotNull LanguageVersion languageVersion)
-	{
-		return PhpTokenTypes.tsCOMMENTS;
-	}
-
-	@Override
-	@NotNull
-	public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion)
+	public TokenSet getStringLiteralElements()
 	{
 		return PhpTokenTypes.tsSTRINGS;
 	}

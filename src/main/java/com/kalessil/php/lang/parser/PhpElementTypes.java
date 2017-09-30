@@ -1,6 +1,8 @@
 package com.kalessil.php.lang.parser;
 
 import com.kalessil.php.lang.PhpLanguage;
+import com.kalessil.php.lang.documentation.phpdoc.parser.PhpDocElementTypes;
+import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.psi.PhpElementType;
 import com.kalessil.php.lang.psi.PhpStubElements;
 import com.intellij.psi.tree.IElementType;
@@ -16,6 +18,8 @@ import com.intellij.psi.tree.TokenSet;
  */
 public interface PhpElementTypes
 {
+	TokenSet tsCOMMENTS = TokenSet.create(PhpTokenTypes.LINE_COMMENT, PhpDocElementTypes.DOC_COMMENT, PhpTokenTypes.C_STYLE_COMMENT);
+
 	IElementType EMPTY_INPUT = new PhpElementType("Unrecognised input");
 
 	IElementType HTML = new PhpElementType("HTML");

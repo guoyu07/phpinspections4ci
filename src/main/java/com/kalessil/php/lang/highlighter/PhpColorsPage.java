@@ -96,7 +96,13 @@ public class PhpColorsPage implements RainbowColorSettingsPage, DisplayPriorityS
 		return new ColorDescriptor[0];
 	}
 
-	@Override
+    @Nullable
+    @Override
+    public Icon getIcon() {
+        return null;
+    }
+
+    @Override
 	@NotNull
 	public SyntaxHighlighter getHighlighter()
 	{
