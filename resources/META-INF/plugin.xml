@@ -9,6 +9,17 @@
     <description>PhpInspections (EA Extended) 4CI</description>
     <change-notes/>
 
-    <extensions defaultExtensionNs="com.intellij"/>
+    <extensions defaultExtensionNs="com.intellij">
+        <fileTypeFactory  implementation="com.kalessil.php.lang.PhpFileTypeFactory"/>
+        <fileTypeDetector implementation="com.kalessil.php.lang.PhpFileDetector"   />
+
+        <lang.syntaxHighlighterFactory language="PHP" implementationClass="com.kalessil.php.lang.highlighter.PhpSyntaxHighlighterFactory"/>
+        <lang.parserDefinition         language="PHP" implementationClass="com.kalessil.php.lang.parser.PhpParserDefinition"             />
+		<lang.commenter                language="PHP" implementationClass="com.kalessil.php.lang.commenter.PhpCommenter"                 />
+		<lang.findUsagesProvider       language="PHP" implementationClass="com.kalessil.php.lang.findUsages.PhpFindUsagesProvider"       />
+		<lang.braceMatcher             language="PHP" implementationClass="com.kalessil.php.lang.braceMatcher.PhpBraceMatcher"           />
+		<lang.foldingBuilder           language="PHP" implementationClass="com.kalessil.php.ide.folding.PhpFoldingBuilder"               />
+
+    </extensions>
     <actions/>
 </idea-plugin>
