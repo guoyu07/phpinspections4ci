@@ -1,25 +1,17 @@
 package com.kalessil.php.codeInsight;
 
-import com.kalessil.php.lang.inspections.PhpDynamicAsStaticMethodCall;
-import com.kalessil.php.lang.inspections.PhpUndefinedMethodCall;
-import com.kalessil.php.lang.inspections.PhpUndefinedVariable;
-import com.kalessil.php.lang.inspections.classes.PhpUnimplementedMethodsInClass;
 import com.intellij.codeInspection.InspectionToolProvider;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author VISTALL
- * @since 18.09.13.
+ * @author kalessil
  */
-public class PhpInspectionToolProvider implements InspectionToolProvider
-{
-	@Override
-	public Class[] getInspectionClasses()
-	{
-		return new Class[]{
-				PhpUndefinedVariable.class,
-				PhpUndefinedMethodCall.class,
-				PhpDynamicAsStaticMethodCall.class,
-				PhpUnimplementedMethodsInClass.class,
-		};
-	}
+public class PhpInspectionToolProvider implements InspectionToolProvider {
+    @Override
+    @NotNull
+    public Class[] getInspectionClasses() {
+        return new Class[]{
+        };
+    }
 }
