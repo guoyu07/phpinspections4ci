@@ -1,26 +1,22 @@
 package com.kalessil.php.lang.highlighter;
 
-import com.kalessil.php.lang.PhpLanguage;
+import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import consulo.fileTypes.LanguageVersionableSyntaxHighlighterFactory;
-import consulo.lang.LanguageVersion;
 
 /**
  * @author VISTALL
- * @since 19.09.13.
+ * @author kalessil
  */
-public class PhpSyntaxHighlighterFactory extends LanguageVersionableSyntaxHighlighterFactory
+public class PhpSyntaxHighlighterFactory extends SyntaxHighlighterFactory
 {
-	public PhpSyntaxHighlighterFactory()
-	{
-		super(PhpLanguage.INSTANCE);
-	}
+	public PhpSyntaxHighlighterFactory() {
+    }
 
-	@NotNull
-	@Override
-	public SyntaxHighlighter getSyntaxHighlighter(@NotNull LanguageVersion languageVersion)
-	{
-		return new PhpFileSyntaxHighlighter(languageVersion);
-	}
+    @NotNull
+    public SyntaxHighlighter getSyntaxHighlighter(Project project, VirtualFile virtualFile) {
+        return new PhpFileSyntaxHighlighter();
+    }
 }
