@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.swing.Icon;
 
+import com.intellij.openapi.projectRoots.*;
+import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.ExecutionException;
@@ -15,20 +17,16 @@ import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkModificator;
-import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.kalessil.php.PhpBundle;
 import com.kalessil.php.PhpIcons2;
-import consulo.roots.types.BinariesOrderRootType;
-import consulo.roots.types.SourcesOrderRootType;
 
 /**
  * @author Maxim
+ * @author kalessil
  */
 public class PhpSdkType extends SdkType
 {
@@ -122,8 +120,8 @@ public class PhpSdkType extends SdkType
 		}
 		else
 		{
-			sdkModificator.addRoot(stubsDir, BinariesOrderRootType.getInstance());
-			sdkModificator.addRoot(stubsDir, SourcesOrderRootType.getInstance());
+			sdkModificator.addRoot(stubsDir, OrderRootType.CLASSES);
+			sdkModificator.addRoot(stubsDir, OrderRootType.SOURCES);
 		}
 
 		sdkModificator.commitChanges();
@@ -132,7 +130,7 @@ public class PhpSdkType extends SdkType
 	@Override
 	public boolean isRootTypeApplicable(OrderRootType type)
 	{
-		return type == BinariesOrderRootType.getInstance() || type == SourcesOrderRootType.getInstance();
+		return type == OrderRootType.CLASSES || type == OrderRootType.SOURCES;
 	}
 
 	@Override
@@ -141,10 +139,26 @@ public class PhpSdkType extends SdkType
 		return PhpIcons2.Php;
 	}
 
+//	@Nullable
+//	@Override
+//	public Icon getGroupIcon()
+//	{
+//		return PhpIcons2.Php;
+//	}
+
+	public void saveAdditionalData(@NotNull SdkAdditionalData additionalData, @NotNull Element additional) {
+    }
+
 	@Nullable
-	@Override
-	public Icon getGroupIcon()
-	{
-		return PhpIcons2.Php;
-	}
+    public AdditionalDataConfigurable createAdditionalDataConfigurable(
+		@NotNull SdkModel sdkModel,
+		@NotNull SdkModificator sdkModificator
+	) {
+        return null;
+    }
+
+    @Nullable
+    public String suggestHomePath() {
+        return null;
+    }
 }
