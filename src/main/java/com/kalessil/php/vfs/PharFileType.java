@@ -1,7 +1,7 @@
 package com.kalessil.php.vfs;
 
+import com.intellij.ide.highlighter.ArchiveFileType;
 import org.jetbrains.annotations.NotNull;
-import consulo.fileTypes.ArchiveFileType;
 
 /**
  * @author VISTALL
@@ -11,7 +11,6 @@ public class PharFileType extends ArchiveFileType
 {
 	public static final PharFileType INSTANCE = new PharFileType();
 
-	@Override
 	public String getProtocol()
 	{
 		return PharFileSystem.PROTOCOL;

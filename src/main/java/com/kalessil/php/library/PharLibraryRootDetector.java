@@ -1,8 +1,9 @@
 package com.kalessil.php.library;
 
+import com.intellij.openapi.roots.OrderRootType;
 import com.kalessil.php.vfs.PharFileType;
 import com.intellij.openapi.roots.libraries.ui.FileTypeBasedRootFilter;
-import consulo.roots.types.BinariesOrderRootType;
+
 
 /**
  * @author VISTALL
@@ -12,6 +13,6 @@ public class PharLibraryRootDetector extends FileTypeBasedRootFilter
 {
 	public PharLibraryRootDetector()
 	{
-		super(BinariesOrderRootType.getInstance(), false, PharFileType.INSTANCE, "Phar library");
+		super(OrderRootType.CLASSES, false, PharFileType.INSTANCE, "Phar library");
 	}
 }
