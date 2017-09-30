@@ -29,8 +29,8 @@ import com.kalessil.php.lang.psi.PhpPackage;
 import com.kalessil.php.lang.psi.PhpPsiElementFactory;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
 import com.kalessil.php.module.extension.PhpModuleExtension;
-import consulo.psi.PsiPackage;
-import consulo.psi.PsiPackageManager;
+import com.intellij.psi.PsiPackage;
+com.intellij.psi.PsiPackageManager;
 
 /**
  * @author jay

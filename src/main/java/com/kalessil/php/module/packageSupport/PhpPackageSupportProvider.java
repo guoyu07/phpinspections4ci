@@ -6,9 +6,9 @@ import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.module.Module;
 import com.intellij.psi.PsiManager;
 import consulo.module.extension.ModuleExtension;
-import consulo.psi.PsiPackage;
-import consulo.psi.PsiPackageManager;
-import consulo.psi.PsiPackageSupportProvider;
+com.intellij.psi.PsiPackage;
+com.intellij.psi.PsiPackageManager;
+com.intellij.psi.PsiPackageSupportProvider;
 
 /**
  * @author VISTALL

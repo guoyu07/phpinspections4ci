@@ -17,8 +17,8 @@ import com.intellij.psi.impl.file.PsiPackageBase;
 import com.intellij.util.ArrayFactory;
 import com.intellij.util.Query;
 import consulo.module.extension.ModuleExtension;
-import consulo.psi.PsiPackage;
-import consulo.psi.PsiPackageManager;
+com.intellij.psi.PsiPackage;
+com.intellij.psi.PsiPackageManager;
 
 /**
  * @author VISTALL
