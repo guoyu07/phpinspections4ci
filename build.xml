@@ -2,9 +2,19 @@
 
     <target name="from-consulo">
         <property name="consulo.php.sources" value="${basedir}/../consulo-php" />
-        <copy todir="${basedir}/src/main/java/com/kalessil/php/lang">
-            <fileset includes="**/*.*" dir="${basedir}/src/consulo/php/lang"/>
+        <copy todir="${basedir}/src/main/java/com/kalessil/php/lang" overwrite="true" force="true">
+            <fileset includes="**/*.*" dir="${consulo.php.sources}/src/consulo/php/lang"/>
+            <filterchain>
+                <replacestring from="consulo.php."                    to="com.kalessil.php."/>
+                <replacestring from="consulo.psi.tree.ASTLazyFactory" to="com.intellij.lang.ASTFactory"/>
+                <replacestring from="implements ASTLazyFactory"       to="implements ASTFactory"/>
+            </filterchain>
         </copy>
+
+        <copy todir="${basedir}/lib" overwrite="true" force="true">
+            <fileset includes="**/*.*" dir="${consulo.php.sources}/lib"/>
+        </copy>
+
     </target>
 
     <target name="from-ea-extended">
