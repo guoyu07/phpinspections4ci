@@ -28,7 +28,7 @@ public class PhpFileSyntaxHighlighter extends SyntaxHighlighterBase
         this(new PhpFlexAdapter(PhpLanguageLevel.HIGHEST));
     }
 
-    public PhpFileSyntaxHighlighter(Lexer baseLexer) {
+    public PhpFileSyntaxHighlighter(@NotNull Lexer baseLexer) {
         this.myBaseLexer = baseLexer;
     }
 

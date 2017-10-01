@@ -12,6 +12,8 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.tree.IElementType;
+import com.kalessil.php.PhpLanguageLevel;
+import com.kalessil.php.lang.lexer.PhpFlexAdapter;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 public class PhpSyntaxHighlighter extends LayeredLexerEditorHighlighter
 {
 	public PhpSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme colors) {
-        this(project, virtualFile, colors, null);
+        this(project, virtualFile, colors, new PhpFlexAdapter(PhpLanguageLevel.HIGHEST));
     }
 
     public PhpSyntaxHighlighter(
