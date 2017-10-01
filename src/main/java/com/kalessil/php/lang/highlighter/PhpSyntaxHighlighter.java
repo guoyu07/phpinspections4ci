@@ -32,7 +32,7 @@ public class PhpSyntaxHighlighter extends LayeredLexerEditorHighlighter
     		@Nullable Project project,
 			@Nullable VirtualFile virtualFile,
 			@NotNull EditorColorsScheme colors,
-			@Nullable Lexer baseLexer
+			@NotNull Lexer baseLexer
 	) {
         super(new PhpFileSyntaxHighlighter(baseLexer), colors);
 
