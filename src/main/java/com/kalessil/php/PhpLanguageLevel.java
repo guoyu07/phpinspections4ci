@@ -15,6 +15,8 @@ public enum PhpLanguageLevel
 	PHP_7_0("7.0.0", "PHP 1.0", ""),
 	PHP_7_1("7.1.0", "PHP 7.1", "");
 
+	public static PhpLanguageLevel HIGHEST = PHP_7_1;
+
 	private final String myVersionString;
 	private final String myPresentableName;
 	private final String myShortDescription;
