@@ -65,12 +65,12 @@ class PhpTreeElement implements StructureViewTreeElement
 		return null;
 	}
 
-	private void listParameters(StringBuilder b, PhpParameter[] parameters)
+	private void listParameters(StringBuilder b, PsiElement[] parameters)
 	{
 		b.append('(');
 		for(int i = 0; i < parameters.length; i++)
 		{
-			PhpParameter parameter = parameters[i];
+			PhpParameter parameter = (PhpParameter) parameters[i];
 			b.append(parameter.getName());
 			if(parameters.length - i > 1)
 			{

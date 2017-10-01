@@ -1,12 +1,13 @@
 package com.kalessil.php.lang.psi;
 
+import com.intellij.psi.PsiElement;
 import com.kalessil.php.lang.psi.resolve.types.PhpTypeOwner;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.ArrayFactory;
 
 /**
  * @author jay
- * @date Apr 3, 2008 10:15:06 PM
+ * @author kalessi
  */
 public interface PhpFunction extends PhpModifierListOwner, PhpTypeOwner, PhpBraceOwner
 {
@@ -22,7 +23,7 @@ public interface PhpFunction extends PhpModifierListOwner, PhpTypeOwner, PhpBrac
 		}
 	};
 
-	PhpParameter[] getParameters();
+	PsiElement[] getParameters();
 
 	ParameterList getParameterList();
 }

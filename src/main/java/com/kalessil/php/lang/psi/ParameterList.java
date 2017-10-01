@@ -1,5 +1,6 @@
 package com.kalessil.php.lang.psi;
 
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -9,5 +10,5 @@ import org.jetbrains.annotations.NotNull;
 public interface ParameterList extends PhpElement
 {
 	@NotNull
-	PhpParameter[] getParameters();
+	PsiElement[] getParameters();
 }

@@ -1,5 +1,6 @@
 package com.kalessil.php.lang.psi.impl;
 
+import com.kalessil.php.lang.psi.PhpElement;
 import com.kalessil.php.lang.psi.PhpParameter;
 import com.kalessil.php.lang.psi.ParameterList;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
@@ -22,9 +23,9 @@ public class PhpParameterListImpl extends PhpElementImpl implements ParameterLis
 
 	@NotNull
 	@Override
-	public PhpParameter[] getParameters()
+	public PsiElement[] getParameters()
 	{
-		return findChildrenByClass(PhpParameter.class);
+		return findChildrenByClass(PhpElement.class);
 	}
 
 	@Override

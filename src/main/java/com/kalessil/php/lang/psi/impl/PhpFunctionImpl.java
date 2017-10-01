@@ -38,7 +38,7 @@ public class PhpFunctionImpl extends PhpStubbedNamedElementImpl<PhpFunctionStub>
 
 	@Override
 	@NotNull
-	public PhpParameter[] getParameters()
+	public PsiElement[] getParameters()
 	{
 		ParameterList parameterList = getParameterList();
 		if(parameterList == null)
@@ -69,7 +69,7 @@ public class PhpFunctionImpl extends PhpStubbedNamedElementImpl<PhpFunctionStub>
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState resolveState, PsiElement psiElement, @NotNull PsiElement psiElement1)
 	{
-		for(PhpParameter parameter : getParameters())
+		for(PsiElement parameter : getParameters())
 		{
 			if(!processor.execute(parameter, resolveState))
 			{
