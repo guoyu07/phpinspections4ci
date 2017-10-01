@@ -20,6 +20,12 @@
 		<lang.braceMatcher             language="PHP" implementationClass="com.kalessil.php.lang.braceMatcher.PhpBraceMatcher"           />
 		<lang.foldingBuilder           language="PHP" implementationClass="com.kalessil.php.ide.folding.PhpFoldingBuilder"               />
 
+        <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Extended)"
+            shortName="ArrayPushMissUseInspection"                    displayName="'array_push(...)' misused"
+            groupName="Performance"                                   enabledByDefault="true" level="WARNING"
+            implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.arrays.ArrayPushMissUseInspector"/>
+
+
     </extensions>
     <actions/>
 </idea-plugin>
