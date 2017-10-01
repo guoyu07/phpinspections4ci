@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.kalessil.php.PhpLanguageLevel;
 import com.kalessil.php.lang.documentation.phpdoc.lexer.PhpDocTokenTypes;
 import com.kalessil.php.lang.documentation.phpdoc.psi.PhpDocElementType;
+import com.kalessil.php.lang.lexer.PhpFlexAdapter;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.lexer.Lexer;
@@ -23,7 +25,7 @@ public class PhpFileSyntaxHighlighter extends SyntaxHighlighterBase
 	private final Lexer myBaseLexer;
 
 	public PhpFileSyntaxHighlighter() {
-        this(null);
+        this(new PhpFlexAdapter(PhpLanguageLevel.HIGHEST));
     }
 
     public PhpFileSyntaxHighlighter(Lexer baseLexer) {

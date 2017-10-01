@@ -36,7 +36,7 @@ public class PhpParserDefinition implements ParserDefinition
 
 	@NotNull
     public Lexer createLexer(@NotNull Project project) {
-		return new PhpFlexAdapter(PhpLanguageLevel.PHP_5_6);
+		return new PhpFlexAdapter(PhpLanguageLevel.HIGHEST);
     }
 
     @NotNull
