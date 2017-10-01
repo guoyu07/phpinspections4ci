@@ -1,8 +1,10 @@
 package com.kalessil.php.lang.parser.parsing.functions;
 
+import com.intellij.psi.tree.TokenSet;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.parser.PhpElementTypes;
 import com.kalessil.php.lang.parser.parsing.classes.ClassReference;
+import com.kalessil.php.lang.parser.parsing.expressions.Expression;
 import com.kalessil.php.lang.parser.parsing.expressions.StaticScalar;
 import com.kalessil.php.lang.parser.util.ListParsingHelper;
 import com.kalessil.php.lang.parser.util.ParserPart;
@@ -13,86 +15,53 @@ import com.intellij.psi.tree.IElementType;
 
 /**
  * @author markov
- * @date 14.10.2007
+ * @author kalesil
  */
 public class ParameterList implements PhpTokenTypes
 {
+    public ParameterList() {
+    }
 
-	//	parameter_list:
-	//		non_empty_parameter_list
-	//		| /* empty */
-	//	;
-	//
+    public static IElementType parse(PhpPsiBuilder builder) {
+        PsiBuilder.Marker parameterList = builder.mark();
+        ParameterList.Parameter part = new ParameterList.Parameter();
+        int result = ListParsingHelper.parseCommaDelimitedExpressionWithLeadExpr(builder, part.parse(builder), part, false);
+        parameterList.done(PhpElementTypes.PARAMETER_LIST);
+        return result > 0 ? PhpElementTypes.PARAMETER_LIST : PhpElementTypes.EMPTY_INPUT;
+    }
 
-	public static IElementType parse(PhpPsiBuilder builder)
-	{
-		PsiBuilder.Marker parameterList = builder.mark();
-		builder.match(chLPAREN);
-		ParserPart parameterParser = new Parameter();
-		int result = ListParsingHelper.parseCommaDelimitedExpressionWithLeadExpr(builder, parameterParser.parse(builder), parameterParser, false);
-		builder.match(chRPAREN);
-		parameterList.done(PhpElementTypes.PARAMETER_LIST);
-		return (result > 0) ? PhpElementTypes.PARAMETER_LIST : PhpElementTypes.EMPTY_INPUT;
-	}
+    private static class Parameter implements ParserPart {
 
-	//	non_empty_parameter_list:
-	//		optional_class_type VARIABLE_REFERENCE
-	//		| optional_class_type '&' VARIABLE_REFERENCE
-	//		| optional_class_type '&' VARIABLE_REFERENCE '=' static_scalar
-	//		| optional_class_type VARIABLE_REFERENCE '=' static_scalar
-	//		| non_empty_parameter_list ',' optional_class_type VARIABLE_REFERENCE
-	//		| non_empty_parameter_list ',' optional_class_type '&' VARIABLE_REFERENCE
-	//		| non_empty_parameter_list ',' optional_class_type '&' VARIABLE_REFERENCE '=' static_scalar
-	//		| non_empty_parameter_list ',' optional_class_type VARIABLE_REFERENCE '=' static_scalar
-	//	;
-	//
-	//	optional_class_type:
-	//		/* empty */
-	//		| IDENTIFIER
-	//		| kwARRAY
-	//	;
+        public IElementType parse(PhpPsiBuilder builder) {
+            if (builder.compare(PhpTokenTypes.chRPAREN)) {
+                return PhpElementTypes.EMPTY_INPUT;
+            } else {
+                PsiBuilder.Marker parameter = builder.mark();
 
-	/*
-		non_empty_parameter_list:
-			parameter | non_empty_parameter_list ',' parameter
-		;
+                PsiBuilder.Marker defaultValue;
 
-		parameter:
-			optional_class_type [opBIT_AND] VARIABLE_REFERENCE [opASGN static_scalar]
-		;
-	 */
-	private static class Parameter implements ParserPart
-	{
+                builder.compareAndEat(PhpTokenTypes.opBIT_AND);
+                builder.compareAndEat(PhpTokenTypes.opVARIADIC);
+                if (builder.compareAndEat(PhpTokenTypes.DOLLAR)) {
+                    builder.error(PhpParserErrors.expected(PhpTokenTypes.VARIABLE));
+                } else if (!builder.compareAndEat(PhpTokenTypes.VARIABLE)) {
+                    builder.error(PhpParserErrors.expected(PhpTokenTypes.VARIABLE));
+                    builder.compareAndEat(PhpTokenTypes.IDENTIFIER);
+                }
 
-		@Override
-		public IElementType parse(PhpPsiBuilder builder)
-		{
-			PsiBuilder.Marker parameter = builder.mark();
+                if (builder.compare(PhpTokenTypes.opASGN)) {
+                    builder.advanceLexer();
+                    defaultValue = builder.mark();
+                    if (Expression.parse(builder) == PhpElementTypes.EMPTY_INPUT) {
+                        builder.error(PhpParserErrors.expected("default value"));
+                    }
 
-			if(!builder.compareAndEat(kwARRAY))
-			{
-				ClassReference.parse(builder);
-			}
+                    defaultValue.done(PhpElementTypes.PARAMETER_DEFAULT_VALUE);
+                }
 
-			builder.compareAndEat(opBIT_AND);
-			if(!builder.compareAndEat(VARIABLE))
-			{
-				parameter.rollbackTo();
-				return PhpElementTypes.EMPTY_INPUT;
-			}
-			if(builder.compare(opASGN))
-			{
-				PsiBuilder.Marker defaultValue = builder.mark();
-				builder.advanceLexer();
-				if(StaticScalar.parse(builder) == PhpElementTypes.EMPTY_INPUT)
-				{
-					builder.error(PhpParserErrors.expected("default value"));
-				}
-				defaultValue.done(PhpElementTypes.PARAMETER_DEFAULT_VALUE);
-			}
-			parameter.done(PhpElementTypes.PARAMETER);
-			return PhpElementTypes.PARAMETER;
-		}
-	}
-
+                parameter.done(PhpElementTypes.PARAMETER);
+                return PhpElementTypes.PARAMETER;
+            }
+        }
+    }
 }

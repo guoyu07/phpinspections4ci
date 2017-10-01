@@ -28,11 +28,13 @@ public class ArrayPushMissUseInspector extends BasePhpInspection {
                 /* check requirements */
                 final PsiElement[] params = reference.getParameters();
                 final String function     = reference.getName();
+holder.registerProblem(reference, String.format("%s, %s, %s", function, params.length, reference.getParameterList().getText()));
                 if (params.length != 2 || function == null || !function.equals("array_push")) {
                     return;
                 }
 
                 /* inspect given call: single instruction, 2nd parameter is not variadic */
+holder.registerProblem(reference, reference.getParent().getClass().getName());
                 if (OpenapiTypesUtil.isStatementImpl(reference.getParent())) {
                     PsiElement variadicCandidate = params[1].getPrevSibling();
                     if (variadicCandidate instanceof PsiWhiteSpace) {
