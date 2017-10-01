@@ -4,7 +4,7 @@ import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.psi.PhpFunction;
 import com.kalessil.php.lang.psi.PhpMethodReference;
 import com.kalessil.php.lang.psi.PhpParameter;
-import com.kalessil.php.lang.psi.PhpParameterList;
+import com.kalessil.php.lang.psi.ParameterList;
 import com.kalessil.php.lang.psi.impl.PhpFileImpl;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.codeInsight.CodeInsightBundle;
@@ -91,7 +91,7 @@ public class PhpParameterInfoHandler implements ParameterInfoHandler
 		final int caret = context.getOffset();
 		if(element instanceof PhpMethodReference)
 		{
-			final PhpParameterList callArgs = PsiTreeUtil.getChildOfType((PsiElement) element, PhpParameterList.class);
+			final ParameterList callArgs = PsiTreeUtil.getChildOfType((PsiElement) element, ParameterList.class);
 			LOG.assertTrue(callArgs != null);
 			index = ParameterInfoUtils.getCurrentParameterIndex(callArgs.getNode(), caret, PhpTokenTypes.opCOMMA);
 			// If we are just before the arguments

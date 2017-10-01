@@ -4,7 +4,7 @@ import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.psi.PhpFunction;
 import com.kalessil.php.lang.psi.PhpModifierList;
 import com.kalessil.php.lang.psi.PhpParameter;
-import com.kalessil.php.lang.psi.PhpParameterList;
+import com.kalessil.php.lang.psi.ParameterList;
 import com.kalessil.php.lang.psi.PhpStubElements;
 import com.kalessil.php.lang.psi.impl.stub.PhpFunctionStub;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
@@ -40,7 +40,7 @@ public class PhpFunctionImpl extends PhpStubbedNamedElementImpl<PhpFunctionStub>
 	@NotNull
 	public PhpParameter[] getParameters()
 	{
-		PhpParameterList parameterList = getParameterList();
+		ParameterList parameterList = getParameterList();
 		if(parameterList == null)
 		{
 			return PhpParameter.EMPTY_ARRAY;
@@ -49,9 +49,9 @@ public class PhpFunctionImpl extends PhpStubbedNamedElementImpl<PhpFunctionStub>
 	}
 
 	@Override
-	public PhpParameterList getParameterList()
+	public ParameterList getParameterList()
 	{
-		return PsiTreeUtil.getChildOfType(this, PhpParameterList.class);
+		return PsiTreeUtil.getChildOfType(this, ParameterList.class);
 	}
 
 	@Override

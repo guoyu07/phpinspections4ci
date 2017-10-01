@@ -18,6 +18,10 @@ import com.intellij.psi.tree.TokenSet;
  */
 public interface PhpElementTypes
 {
+	IElementType CONSTANT_REF = new PhpElementType("Constant reference");
+	IElementType CLOSURE = new PhpElementType("Closure");
+	IElementType ARRAY_CREATION_EXPRESSION = new PhpElementType("Array creation expression");
+
 	TokenSet tsCOMMENTS = TokenSet.create(PhpTokenTypes.LINE_COMMENT, PhpDocElementTypes.DOC_COMMENT, PhpTokenTypes.C_STYLE_COMMENT);
 
 	IElementType EMPTY_INPUT = new PhpElementType("Unrecognised input");

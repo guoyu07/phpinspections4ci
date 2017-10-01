@@ -51,9 +51,9 @@ public class PhpTypeAnnotatorVisitor extends PhpElementVisitor
 		else
 		{
 			PsiElement parent = variable.getParent();
-			if(parent instanceof PhpAssignmentExpression)
+			if(parent instanceof AssignmentExpression)
 			{
-				PsiElement value = ((PhpAssignmentExpression) parent).getValue();
+				PsiElement value = ((AssignmentExpression) parent).getValue();
 				if(value instanceof PhpTypeOwner)
 				{
 					type.addClasses(((PhpTypeOwner) value).getType().getTypes());
@@ -72,7 +72,7 @@ public class PhpTypeAnnotatorVisitor extends PhpElementVisitor
 	}
 
 	@Override
-	public void visitAssignmentExpression(PhpAssignmentExpression expr)
+	public void visitAssignmentExpression(AssignmentExpression expr)
 	{
 		PhpType type = new PhpType();
 		PsiElement value = expr.getValue();

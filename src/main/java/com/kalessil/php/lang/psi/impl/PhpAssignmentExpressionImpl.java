@@ -1,6 +1,6 @@
 package com.kalessil.php.lang.psi.impl;
 
-import com.kalessil.php.lang.psi.PhpAssignmentExpression;
+import com.kalessil.php.lang.psi.AssignmentExpression;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
@@ -12,7 +12,7 @@ import com.intellij.psi.scope.PsiScopeProcessor;
  * @author jay
  * @date Apr 4, 2008 11:28:27 AM
  */
-public class PhpAssignmentExpressionImpl extends PhpTypeOwnerImpl implements PhpAssignmentExpression
+public class PhpAssignmentExpressionImpl extends PhpTypeOwnerImpl implements AssignmentExpression
 {
 	public PhpAssignmentExpressionImpl(ASTNode node)
 	{

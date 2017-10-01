@@ -1,8 +1,8 @@
 package com.kalessil.php.lang.psi.impl;
 
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
-import com.kalessil.php.lang.psi.PhpFunctionCall;
-import com.kalessil.php.lang.psi.PhpParameterList;
+import com.kalessil.php.lang.psi.FunctionReference;
+import com.kalessil.php.lang.psi.ParameterList;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,12 +18,12 @@ import com.intellij.util.IncorrectOperationException;
 
 /**
  * @author jay
- * @date May 15, 2008 12:36:39 PM
+ * @author kalessil
  */
-public class PhpFunctionCallImpl extends PhpElementImpl implements PhpFunctionCall
+public class FunctionReferenceImpl extends PhpElementImpl implements FunctionReference
 {
 
-	public PhpFunctionCallImpl(ASTNode node)
+	public FunctionReferenceImpl(ASTNode node)
 	{
 		super(node);
 	}
@@ -31,7 +31,7 @@ public class PhpFunctionCallImpl extends PhpElementImpl implements PhpFunctionCa
 	@Override
 	public void accept(@NotNull PhpElementVisitor visitor)
 	{
-		visitor.visitFunctionCall(this);
+		visitor.visitPhpFunctionCall(this);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class PhpFunctionCallImpl extends PhpElementImpl implements PhpFunctionCa
 	}
 
 	@Override
-	public String getFunctionName()
+	public String getName()
 	{
 		if(canReadName())
 		{
@@ -85,10 +85,16 @@ public class PhpFunctionCallImpl extends PhpElementImpl implements PhpFunctionCa
 	}
 
 	@Override
-	public PhpParameterList getParameterList()
+	public ParameterList getParameterList()
 	{
-		return PsiTreeUtil.getChildOfType(this, PhpParameterList.class);
+		return PsiTreeUtil.getChildOfType(this, ParameterList.class);
 	}
+
+	@NotNull
+    public PsiElement[] getParameters() {
+        ParameterList list = this.getParameterList();
+        return list != null ? list.getParameters() : PsiElement.EMPTY_ARRAY;
+    }
 
 	@Override
 	public TextRange getRangeInElement()
@@ -124,7 +130,7 @@ public class PhpFunctionCallImpl extends PhpElementImpl implements PhpFunctionCa
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		/*DeclarationsIndex index = DeclarationsIndex.getInstance(this);
-		List<LightPhpFunction> functions = index.getFunctionsByName(getFunctionName());
+		List<LightPhpFunction> functions = index.getFunctionsByName(getName());
 		ResolveResult[] result = new PhpResolveResult[functions.size()];
 		for(int i = 0; i < functions.size(); i++)
 		{

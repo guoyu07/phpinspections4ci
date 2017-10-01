@@ -37,7 +37,7 @@ public abstract class PhpElementVisitor extends PsiElementVisitor
 		visitPhpElement(expression);
 	}
 
-	public void visitAssignmentExpression(PhpAssignmentExpression expr)
+	public void visitAssignmentExpression(AssignmentExpression expr)
 	{
 		visitPhpElement(expr);
 	}
@@ -62,7 +62,7 @@ public abstract class PhpElementVisitor extends PsiElementVisitor
 		visitPhpElement(phpCatch);
 	}
 
-	public void visitParameterList(PhpParameterList list)
+	public void visitParameterList(ParameterList list)
 	{
 		visitPhpElement(list);
 	}
@@ -122,7 +122,7 @@ public abstract class PhpElementVisitor extends PsiElementVisitor
 		visitPhpElement(constant);
 	}
 
-	public void visitFunctionCall(PhpFunctionCall call)
+	public void visitPhpFunctionCall(FunctionReference call)
 	{
 		visitPhpElement(call);
 	}

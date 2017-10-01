@@ -111,7 +111,7 @@ public class PhpPsiCreator implements PhpElementTypes
 		}
 		if(type == FUNCTION_CALL)
 		{
-			return new PhpFunctionCallImpl(node);
+			return new FunctionReferenceImpl(node);
 		}
 
 		if(type == EXTENDS_LIST)

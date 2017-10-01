@@ -24,5 +24,5 @@ public interface PhpFunction extends PhpModifierListOwner, PhpTypeOwner, PhpBrac
 
 	PhpParameter[] getParameters();
 
-	PhpParameterList getParameterList();
+	ParameterList getParameterList();
 }

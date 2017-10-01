@@ -1,7 +1,7 @@
 package com.kalessil.php.lang.psi.impl;
 
 import com.kalessil.php.lang.psi.PhpParameter;
-import com.kalessil.php.lang.psi.PhpParameterList;
+import com.kalessil.php.lang.psi.ParameterList;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
@@ -13,7 +13,7 @@ import com.intellij.psi.scope.PsiScopeProcessor;
  * @author jay
  * @date Apr 15, 2008 2:01:07 PM
  */
-public class PhpParameterListImpl extends PhpElementImpl implements PhpParameterList
+public class PhpParameterListImpl extends PhpElementImpl implements ParameterList
 {
 	public PhpParameterListImpl(ASTNode node)
 	{

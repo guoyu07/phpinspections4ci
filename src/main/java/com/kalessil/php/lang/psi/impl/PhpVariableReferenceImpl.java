@@ -19,7 +19,7 @@ import com.intellij.util.ArrayUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.kalessil.php.completion.PhpVariantsUtil;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
-import com.kalessil.php.lang.psi.PhpAssignmentExpression;
+import com.kalessil.php.lang.psi.AssignmentExpression;
 import com.kalessil.php.lang.psi.PhpCatchStatement;
 import com.kalessil.php.lang.psi.PhpElement;
 import com.kalessil.php.lang.psi.PhpForeachStatement;
@@ -94,9 +94,9 @@ public class PhpVariableReferenceImpl extends PhpNamedElementImpl implements Php
 	@Override
 	public boolean isDeclaration()
 	{
-		if((getParent() instanceof PhpAssignmentExpression) && !(getParent() instanceof PhpSelfAssignmentExpression))
+		if((getParent() instanceof AssignmentExpression) && !(getParent() instanceof PhpSelfAssignmentExpression))
 		{
-			return ((PhpAssignmentExpression) getParent()).getVariable() == this;
+			return ((AssignmentExpression) getParent()).getVariable() == this;
 		}
 		if(getParent() instanceof PhpForeachStatement)
 		{

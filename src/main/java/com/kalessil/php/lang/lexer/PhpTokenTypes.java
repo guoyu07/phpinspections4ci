@@ -16,6 +16,7 @@ import com.intellij.psi.tree.TokenSet;
  */
 public interface PhpTokenTypes extends PhpDocElementTypes, TokenType
 {
+	IElementType opVARIADIC = new PhpElementType("variadic");
 
 	IElementType PHP_OPENING_TAG = new PhpElementType("php opening tag"); // <?php or <?
 	IElementType PHP_ECHO_OPENING_TAG = new PhpElementType("php echo opening tag"); // <?=
