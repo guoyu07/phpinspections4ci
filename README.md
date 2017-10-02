@@ -4,6 +4,10 @@ What is this?
 PHP-plugin for IDEA CE based on Consulo IDE (https://consulo.io/) PHP plugin (https://github.com/consulo/consulo-php).
 It's for demonstration purposes only, please don't use for development - support is not provided currently.
 
+Apparently the plgin has longer story:
+- http://idea-php.sourceforge.net
+- https://plugins.jetbrains.com/plugin/1861-php-for-idea-8
+
 Current status
 ---
 
