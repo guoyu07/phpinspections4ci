@@ -16,13 +16,11 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.SmartList;
-import com.kalessil.php.PhpConstants;
 import com.kalessil.php.completion.ClassUsageContext;
 import com.kalessil.php.index.PhpFullFqClassIndex;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.parser.PhpElementTypes;
 import com.kalessil.php.lang.psi.visitors.PhpElementVisitor;
-import com.intellij.psi.PsiPackage;
 
 /**
  * @author jay
@@ -111,7 +109,7 @@ public class PhpClassReferenceImpl extends PhpElementImpl implements PhpClassRef
 				return ResolveResult.EMPTY_ARRAY;
 
 			case TO_FQ_CLASS:
-				if(PhpConstants.SELF.equals(name))
+				if(name.equalsIgnoreCase("self"))
 				{
 					PhpClass parentOfType = PsiTreeUtil.getParentOfType(this, PhpClass.class);
 
@@ -124,7 +122,7 @@ public class PhpClassReferenceImpl extends PhpElementImpl implements PhpClassRef
 						return ResolveResult.EMPTY_ARRAY;
 					}
 				}
-				else if(PhpConstants.PARENT.equals(name))
+				else if(name.equalsIgnoreCase("parent"))
 				{
 					PhpClass parentOfType = PsiTreeUtil.getParentOfType(this, PhpClass.class);
 
