@@ -4,6 +4,7 @@ import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.parser.PhpElementTypes;
 import com.kalessil.php.lang.parser.parsing.expressions.Expression;
 import com.kalessil.php.lang.parser.parsing.statements.*;
+import com.kalessil.php.lang.parser.util.PhpParserErrors;
 import com.kalessil.php.lang.parser.util.PhpPsiBuilder;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
@@ -11,10 +12,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.kalessil.php.lang.parser.parsing.statements.ForStatement;
 
 /**
- * Created by IntelliJ IDEA.
- * User: markov
- * Date: 12.10.2007
- * Time: 11:44:18
+ * @author markov
+ * @author kalessil
  */
 public class Statement implements PhpTokenTypes
 {
@@ -57,17 +56,14 @@ public class Statement implements PhpTokenTypes
 	public static IElementType parse(PhpPsiBuilder builder)
 	{
 		//		'{' statement_list '}'
-		if(builder.compareAndEat(chLBRACE))
-		{
-			StatementList.parse(builder, chRBRACE);
-			builder.match(chRBRACE);
-			return PhpElementTypes.GROUP_STATEMENT;
-		}
-		//		HTML
-		if(builder.compare(TokenSet.create(HTML, PHP_CLOSING_TAG)))
-		{
+        if (builder.compare(PhpTokenTypes.chLBRACE)) {
+            StatementList.parse(builder, TokenSet.EMPTY.getTypes());
+            return PhpElementTypes.GROUP_STATEMENT;
+        }
+        //		HTML
+        else if(builder.compare(TokenSet.create(HTML, PHP_CLOSING_TAG))) {
 			builder.compareAndEat(PHP_CLOSING_TAG);
-			PsiBuilder.Marker html = builder.mark();
+			final PsiBuilder.Marker html = builder.mark();
 			if(builder.compareAndEat(HTML))
 			{
 				html.done(PhpElementTypes.HTML);
@@ -80,24 +76,32 @@ public class Statement implements PhpTokenTypes
 			return PhpElementTypes.HTML;
 		}
 		//		';' /* empty statement */
-		if(builder.compare(opSEMICOLON))
-		{
-			PsiBuilder.Marker statement = builder.mark();
-			builder.advanceLexer();
-			statement.done(PhpElementTypes.STATEMENT);
-			return PhpElementTypes.STATEMENT;
-		}
-		IElementType result = parseStatementByKeyword(builder);
-		//		expr ';'
-		if(result == PhpElementTypes.EMPTY_INPUT)
-		{
-			result = Expression.parse(builder);
-			if(result != PhpElementTypes.EMPTY_INPUT && builder.getTokenType() != PHP_CLOSING_TAG)
-			{
-				builder.match(opSEMICOLON);
-			}
-		}
-		return result;
+		else if (builder.compare(PhpTokenTypes.opSEMICOLON)) {
+            final PsiBuilder.Marker statement = builder.mark();
+            builder.advanceLexer();
+            statement.done(PhpElementTypes.STATEMENT);
+            return PhpElementTypes.STATEMENT;
+        }
+        //		expr ';'
+        else {
+            IElementType result = parseStatementByKeyword(builder);
+            if (result == PhpElementTypes.EMPTY_INPUT) {
+                PsiBuilder.Marker statement = builder.mark();
+                result = Expression.parse(builder);
+                if (result != PhpElementTypes.EMPTY_INPUT) {
+                    if (builder.getTokenType() != PhpTokenTypes.PHP_CLOSING_TAG) {
+                        builder.match(PhpTokenTypes.opSEMICOLON);
+                    }
+
+                    statement.done(PhpElementTypes.STATEMENT);
+                } else {
+                    statement.drop();
+                    builder.error(PhpParserErrors.expected("statement"));
+                }
+            }
+
+            return result;
+        }
 	}
 
 	//	statement:
