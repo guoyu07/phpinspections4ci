@@ -13,10 +13,8 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 
 /**
- * Created by IntelliJ IDEA.
  * User: markov
- * Date: 12.10.2007
- * Time: 10:31:27
+ * User: kalessil
  */
 public class StatementList implements PhpTokenTypes
 {
@@ -38,37 +36,30 @@ public class StatementList implements PhpTokenTypes
 
 	private static void parse(PhpPsiBuilder builder, TokenSet whereToStop)
 	{
-		PsiBuilder.Marker statementList = builder.mark();
+        PsiBuilder.Marker statementList = builder.mark();
+        if (!whereToStop.contains(builder.getTokenType())) {
+            while(true) {
+                final int previous = builder.getCurrentOffset();
+                if (!parseTopStatement(builder)) {
+                    final IElementType tokenType = builder.getTokenType();
+                    if (tokenType != null) {
+                        builder.error("Unexpected token: " + tokenType);
+                        builder.advanceLexer();
+                    }
+                }
 
-		if(!whereToStop.contains(builder.getTokenType()))
-		{
-			int previous;
-			while(true)
-			{
-				previous = builder.getCurrentOffset();
-				if(!parseTopStatement(builder))
-				{
-					final IElementType tokenType = builder.getTokenType();
-					if(tokenType != null)
-					{
-						builder.error("Unexpected token: " + tokenType);
-						builder.advanceLexer();
-					}
-				}
+                if (builder.eof() || whereToStop.contains(builder.getTokenType())) {
+                    break;
+                }
 
-				if(builder.eof() || whereToStop.contains(builder.getTokenType()))
-				{
-					break;
-				}
-				if(previous == builder.getCurrentOffset())
-				{
-					builder.error(PhpParserErrors.unexpected(builder.getTokenType()));
-					builder.advanceLexer();
-				}
-			}
-		}
+                if (previous == builder.getCurrentOffset()) {
+                    builder.error(PhpParserErrors.unexpected(builder.getTokenType()));
+                    builder.advanceLexer();
+                }
+            }
+        }
 
-		statementList.done(PhpElementTypes.GROUP_STATEMENT);
+        statementList.collapse(PhpElementTypes.GROUP_STATEMENT);
 	}
 
 	private static boolean parseTopStatement(PhpPsiBuilder builder)
