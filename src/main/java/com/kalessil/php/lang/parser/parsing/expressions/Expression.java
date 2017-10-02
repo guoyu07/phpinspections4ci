@@ -6,9 +6,8 @@ import com.kalessil.php.lang.parser.util.PhpPsiBuilder;
 import com.intellij.psi.tree.IElementType;
 
 /**
- * Created by IntelliJ IDEA.
- * User: markov
- * Date: 29.10.2007
+ * @author markov
+ * @author kalessil
  */
 public class Expression implements PhpTokenTypes
 {
