@@ -18,6 +18,7 @@ Demo
 - Get IDEA CE and install plugin from binary in the repo master;
 - Create PHP-file and insert this text there;
 ```php
+<?php
     /* -- ArrayPushMissUseInspector -- */
     array_push($arr, '');
 
