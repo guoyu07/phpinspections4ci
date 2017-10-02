@@ -30,6 +30,11 @@
             groupName="Unused"                                        enabledByDefault="true" level="WEAK WARNING"
             implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.dateTime.DateUsageInspector"/>
 
+        <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Extended)"
+            shortName="MktimeUsageInspection"                         displayName="'gmmktime(...)'/'mktime(...)' usage"
+            groupName="Compatibility"                                 enabledByDefault="true" level="WARNING"
+            implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.dateTime.MktimeUsageInspector"/>
+
     </extensions>
     <actions/>
 </idea-plugin>
