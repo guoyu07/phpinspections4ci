@@ -6,7 +6,6 @@
             <fileset includes="**/*.*" dir="${consulo.php.sources}/src/consulo/php"/>
             <filterchain>
                 <replacestring from="consulo.php" to="com.kalessil.php"/>
-                <replacestring from="consulo.php" to="com.kalessil.php"/>
             </filterchain>
         </copy>
 
@@ -22,7 +21,6 @@
         <copy todir="${basedir}/resources/messages" overwrite="true" force="true">
             <fileset includes="**/*.*" dir="${consulo.php.sources}/resources/messages"/>
         </copy>
-
     </target>
 
     <target name="from-ea-extended">
