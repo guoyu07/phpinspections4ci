@@ -25,6 +25,10 @@
             groupName="Performance"                                   enabledByDefault="true" level="WARNING"
             implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.arrays.ArrayPushMissUseInspector"/>
 
+        <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Extended)"
+            shortName="DateUsageInspection"                           displayName="Unnecessary 'date(...)' arguments specification"
+            groupName="Unused"                                        enabledByDefault="true" level="WEAK WARNING"
+            implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.dateTime.DateUsageInspector"/>
 
     </extensions>
     <actions/>
