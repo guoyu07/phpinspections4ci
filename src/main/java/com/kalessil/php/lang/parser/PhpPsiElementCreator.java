@@ -12,14 +12,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 
 /**
- * Created by IntelliJ IDEA.
- * User: jay
- * Date: 30.03.2007
- *
  * @author jay
+ * @author kalessil
  */
 @Deprecated
-public class PhpPsiCreator implements PhpElementTypes
+public class PhpPsiElementCreator implements PhpElementTypes
 {
 
 	public static PsiElement create(ASTNode node)

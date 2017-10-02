@@ -69,7 +69,7 @@ public class PhpParserDefinition implements ParserDefinition
 	@NotNull
 	public PsiElement createElement(ASTNode node)
 	{
-		return PhpPsiCreator.create(node);
+		return PhpPsiElementCreator.create(node);
 	}
 
 	@Override
