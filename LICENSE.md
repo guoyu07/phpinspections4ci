@@ -1,0 +1,1 @@
+Same as here: https://github.com/kalessil/phpinspectionsea/blob/master/LICENSE.md
