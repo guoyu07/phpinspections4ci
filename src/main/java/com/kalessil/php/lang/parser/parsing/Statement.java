@@ -57,7 +57,7 @@ public class Statement implements PhpTokenTypes
 	{
 		//		'{' statement_list '}'
         if (builder.compare(PhpTokenTypes.chLBRACE)) {
-            StatementList.parse(builder, TokenSet.EMPTY.getTypes());
+            StatementList.parse(builder, TokenSet.EMPTY);
             return PhpElementTypes.GROUP_STATEMENT;
         }
         //		HTML

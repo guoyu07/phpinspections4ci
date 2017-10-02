@@ -1,5 +1,6 @@
 package com.kalessil.php.lang.parser.parsing.statements;
 
+import com.intellij.psi.tree.TokenSet;
 import com.kalessil.php.lang.lexer.PhpTokenTypes;
 import com.kalessil.php.lang.parser.PhpElementTypes;
 import com.kalessil.php.lang.parser.parsing.Statement;
@@ -60,7 +61,7 @@ public class IfStatement implements PhpTokenTypes
 	//	;
 	private static void parseNewStyleIf(PhpPsiBuilder builder)
 	{
-		StatementList.parse(builder, kwELSEIF, kwELSE, kwENDIF);
+		StatementList.parse(builder, TokenSet.create(kwELSEIF, kwELSE, kwENDIF));
 		while(builder.compare(kwELSEIF))
 		{
 			PsiBuilder.Marker elseifClause = builder.mark();
@@ -69,7 +70,7 @@ public class IfStatement implements PhpTokenTypes
 			Expression.parse(builder);
 			builder.match(chRPAREN);
 			builder.match(opCOLON);
-			StatementList.parse(builder, kwELSEIF, kwELSE, kwENDIF);
+			StatementList.parse(builder, TokenSet.create(kwELSEIF, kwELSE, kwENDIF));
 			elseifClause.done(PhpElementTypes.ELSE_IF);
 		}
 		if(builder.compare(kwELSE))

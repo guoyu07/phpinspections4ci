@@ -18,6 +18,7 @@ import com.intellij.psi.tree.TokenSet;
  */
 public interface PhpElementTypes
 {
+	IElementType TOP_GROUP_STATEMENT = new PhpElementType("PsiElement(Group statement)");
 	IElementType CONSTANT_REF = new PhpElementType("Constant reference");
 	IElementType CLOSURE = new PhpElementType("Closure");
 	IElementType ARRAY_CREATION_EXPRESSION = new PhpElementType("Array creation expression");

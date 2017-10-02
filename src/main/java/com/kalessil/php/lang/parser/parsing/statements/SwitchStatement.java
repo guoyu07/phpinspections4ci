@@ -94,7 +94,7 @@ public class SwitchStatement implements PhpTokenTypes
 		if(builder.compareAndEat(kwDEFAULT))
 		{
 			builder.match(TokenSet.create(opCOLON, opSEMICOLON));
-			StatementList.parse(builder, whereToStop, kwCASE, kwDEFAULT);
+			StatementList.parse(builder, TokenSet.create(whereToStop, kwCASE, kwDEFAULT));
 			caseMarker.done(PhpElementTypes.CASE_DEFAULT);
 			return PhpElementTypes.CASE_DEFAULT;
 		}
@@ -106,7 +106,7 @@ public class SwitchStatement implements PhpTokenTypes
 				builder.error(PhpParserErrors.EXPRESSION_EXPECTED_MESSAGE);
 			}
 			builder.match(TokenSet.create(opCOLON, opSEMICOLON));
-			StatementList.parse(builder, whereToStop, kwCASE, kwDEFAULT);
+			StatementList.parse(builder, TokenSet.create(whereToStop, kwCASE, kwDEFAULT));
 			caseMarker.done(PhpElementTypes.CASE);
 			return PhpElementTypes.CASE;
 		}
