@@ -137,74 +137,42 @@ public class Statement implements PhpTokenTypes
 	//	;
 	private static IElementType parseStatementByKeyword(PhpPsiBuilder builder)
 	{
-		if(!builder.compare(tsSTATEMENT_FIRST_TOKENS))
-		{
-			return PhpElementTypes.EMPTY_INPUT;
-		}
-		if(builder.compare(kwIF))
-		{
-			return IfStatement.parse(builder);
-		}
-		if(builder.compare(kwWHILE))
-		{
-			return WhileStatement.parse(builder);
-		}
-		if(builder.compare(kwDO))
-		{
-			return DoWhileStatement.parse(builder);
-		}
-		if(builder.compare(kwFOR))
-		{
-			return ForStatement.parse(builder);
-		}
-		if(builder.compare(kwSWITCH))
-		{
-			return SwitchStatement.parse(builder);
-		}
-		if(builder.compare(kwBREAK))
-		{
-			return BreakStatement.parse(builder);
-		}
-		if(builder.compare(kwCONTINUE))
-		{
-			return ContinueStatement.parse(builder);
-		}
-		if(builder.compare(kwRETURN))
-		{
-			return ReturnStatement.parse(builder);
-		}
-		if(builder.compare(kwGLOBAL))
-		{
-			return GlobalStatement.parse(builder);
-		}
-		if(builder.compare(STATIC_KEYWORD))
-		{
-			return StaticStatement.parse(builder);
-		}
-		if(builder.compare(kwECHO))
-		{
-			return EchoStatement.parse(builder);
-		}
-		if(builder.compare(kwUNSET))
-		{
-			return UnsetStatement.parse(builder);
-		}
-		if(builder.compare(kwFOREACH))
-		{
-			return ForeachStatement.parse(builder);
-		}
-		if(builder.compare(kwDECLARE))
-		{
-			return DeclareStatement.parse(builder);
-		}
-		if(builder.compare(kwTRY))
-		{
-			return TryStatement.parse(builder);
-		}
-		if(builder.compare(kwTHROW))
-		{
-			return ThrowStatement.parse(builder);
-		}
-		return PhpElementTypes.EMPTY_INPUT;
-	}
+        if (!builder.compare(tsSTATEMENT_FIRST_TOKENS)) {
+            return PhpElementTypes.EMPTY_INPUT;
+        } else if (builder.compare(kwIF)) {
+            return IfStatement.parse(builder);
+        } else if (builder.compare(kwWHILE)) {
+            return WhileStatement.parse(builder);
+        } else if (builder.compare(kwDO)) {
+            return DoWhileStatement.parse(builder);
+        } else if (builder.compare(kwFOR)) {
+            return ForStatement.parse(builder);
+        } else if (builder.compare(kwSWITCH)) {
+            return SwitchStatement.parse(builder);
+        } else if (builder.compare(kwBREAK)) {
+            return BreakStatement.parse(builder);
+        } else if (builder.compare(kwCONTINUE)) {
+            return ContinueStatement.parse(builder);
+        } else if (builder.compare(kwRETURN)) {
+            return ReturnStatement.parse(builder);
+        } else if (builder.compare(kwGLOBAL)) {
+            return GlobalStatement.parse(builder);
+        } else if (builder.compare(STATIC_KEYWORD)) {
+            return StaticStatement.parse(builder);
+        } else if (builder.compare(kwECHO)) {
+            return EchoStatement.parse(builder);
+        } else if (builder.compare(kwUNSET)) {
+            return UnsetStatement.parse(builder);
+        } else if (builder.compare(kwFOREACH)) {
+            return ForeachStatement.parse(builder);
+        } else if (builder.compare(kwDECLARE)) {
+            return DeclareStatement.parse(builder);
+        } else if (builder.compare(kwTRY)) {
+            return TryStatement.parse(builder);
+        } else if (builder.compare(kwTHROW)) {
+            return ThrowStatement.parse(builder);
+        } else {
+            return PhpElementTypes.EMPTY_INPUT;
+        }
+    }
 }
