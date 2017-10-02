@@ -9,7 +9,7 @@ Current status
 
 - Lexer/Parser needs work:
 - We ported sample Php Inspections (EA Extended) inspections;
-- Indexing, navigation all ets has been disabled - we are targeting CI solution and nothing more;
+- Indexing, navigation all ets has been disabled - only syntax highlighting and inspections are there;
 - Public announcement is coming next weeks;
 
 Demo
